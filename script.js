@@ -21,17 +21,24 @@ function renderProducts() {
   });
 }
 
-// Render cart list
-function renderCart() {}
-
-// Add item to cart
-function addToCart(productId) {}
-
 // Remove item from cart
-function removeFromCart(productId) {}
+function removeFromCart(productId) {
+  // Filter out the item with matching id
+  cart = cart.filter(item => item.id !== productId);
+
+  // Update session storage
+  sessionStorage.setItem("cart", JSON.stringify(cart));
+
+  // Re-render cart UI
+  renderCart();
+}
 
 // Clear cart
-function clearCart() {}
+function clearCart() {
+  cart = []; // empty the array
+  sessionStorage.setItem("cart", JSON.stringify(cart)); // update sessionStorage
+  renderCart(); // update UI
+}
 
 // Initial render
 renderProducts();
